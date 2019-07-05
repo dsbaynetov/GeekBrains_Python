@@ -42,6 +42,30 @@ number = """
 71636269561882670428252483600823257530420752963450"""
 
 
+def mult_items(number):
+    result = 1
+    for i in range(0, len(number)):
+        result *= int(number[i])
+    return result
+
+
+import re
+symb_groups = dict()
+max_sum = 0
+
+for item in re.finditer(r'(\d){5}', number):
+    if (item):
+        num_str = item.group()
+        symb_groups[num_str] = mult_items(num_str)
+
+#находим значение ключа с максимальным значением
+temp = max(symb_groups, key=symb_groups.get)
+print(symb_groups)
+print(f"Последовательность символов: {temp}")
+print(f"Произведение символов: {symb_groups[temp]}")
+print(f"Индекс: {re.search(temp, number).start()}")
+
+
 # Задание-3 (Ферзи):
 # Известно, что на доске 8×8 можно расставить 8 ферзей так, чтобы они не били
 # друг друга. Вам дана расстановка 8 ферзей на доске.

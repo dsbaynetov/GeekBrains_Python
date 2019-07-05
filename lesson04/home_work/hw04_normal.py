@@ -62,25 +62,14 @@ import random
 
 n = (random.randint(0, 9) for i in range(2500))
 line_str = ''.join(str(i) for i in n)
-#line_str = '555433273946666777777'
+# line_str = '555433273946666777777'
 
 with open('output.txt', 'w', )  as f:
        f.write(line_str)
 
-#получить символы повтояющиеся подряд более 1 раза
-d =re.findall(r'(\d)\1+', line_str)
-#d = {i for i in line_str}
-
-#подсчитываем кол-во вхождений и записываем в словарь
-symb_count = dict()
-for symb in d:
-#    for j in range(line_str.count(symb)+1, 1, -1):
-    for j in range(line_str.count(symb), 1, -1):
-        #print(symb*j)
-        if symb*j in line_str:
-            symb_count[symb] = j
-            break
-print(symb_count)
-#найти символ с максимальным вхождением
-c = max(symb_count)
-print(f"Максимальное вхождение: {c * symb_count[c]}")
+# находим все повторяющиеся группы символов
+symb_groups = []
+for item in re.finditer(r'(\d)\1+', line_str):
+       if (item):
+              symb_groups.append(item.group())
+print(f"Максимальное вхождение: {max(symb_groups)}")
